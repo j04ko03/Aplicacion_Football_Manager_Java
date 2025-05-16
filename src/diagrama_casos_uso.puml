@@ -1,0 +1,36 @@
+@startuml
+left to right direction
+actor "Usuario/Administrador" as admin #FFD700
+
+rectangle "Sistema de Gestión de Fútbol" {
+  admin --> (Gestionar Equipos)
+  admin --> (Gestionar Jugadores)
+  admin --> (Gestionar Entrenadores)
+  admin --> (Organizar Ligas)
+  admin --> (Realizar Entrenamientos)
+  admin --> (Transferir Jugadores)
+  admin --> (Consultar Estadísticas)
+  admin --> (Generar Reportes)
+
+  (Gestionar Equipos) .> (Crear Equipo) : include
+  (Gestionar Equipos) .> (Eliminar Equipo) : include
+  (Gestionar Equipos) .> (Modificar Presidente) : include
+
+  (Gestionar Jugadores) .> (Registrar Jugador) : include
+  (Gestionar Jugadores) .> (Dar de Baja Jugador) : include
+
+  (Organizar Ligas) .> (Programar Partidos) : include
+  (Organizar Ligas) .> (Simular Liga) : include
+
+  (Consultar Estadísticas) <.. (Ver Tabla de Posiciones) : extend
+}
+
+note right of admin
+  **Acciones clave del usuario:**
+  - Menú interactivo (CLI)
+  - Operaciones CRUD
+  - Simulaciones deportivas
+  - Gestión financiera (sueldos)
+end note
+
+@enduml
