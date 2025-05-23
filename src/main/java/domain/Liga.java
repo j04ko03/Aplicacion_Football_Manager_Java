@@ -4,6 +4,11 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.*;
 
+/**
+ * Representa una liga de equipos.
+ * Permite agregar equipos, gestionar partidos y calcular la clasificación en función de los resultados.
+ * Gestiona la lógica del torneo, desde partidos hasta estadísticas globales.
+ */
 public class Liga implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;

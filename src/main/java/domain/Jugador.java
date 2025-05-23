@@ -4,6 +4,11 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Random;
 
+/**
+ * Representa un jugador de un equipo.
+ * Hereda de {@link Persona} y añade propiedades como dorsal, posición y calidad.
+ * Proporciona métodos para el entrenamiento, cambio ocasional de posición y ordenación.
+ */
 public class Jugador extends Persona implements Comparable<Jugador> {
     public static final String[] POSICIONES = {"POR", "DEF", "MIG", "DAV"};
     private static int totalJugadores = 0;

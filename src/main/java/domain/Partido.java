@@ -3,6 +3,10 @@ package main.java.domain;
 import java.util.Objects;
 import java.util.Random;
 
+/**
+ * Representa un partido disputado entre dos equipos.
+ * Gestiona el resultado (goles), si ha sido jugado, e implementa la lógica para simular un partido.
+ */
 public class Partido {
     private final Equipo local;
     private final Equipo visitante;

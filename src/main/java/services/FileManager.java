@@ -6,6 +6,14 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+/**
+ * Clase utilitaria para gestionar las operaciones de entrada y salida de archivos
+ * relacionados con el mercado de fichajes y los equipos.
+ * <p>
+ * Permite cargar y guardar información de jugadores, entrenadores y equipos desde/para
+ * archivos de texto y binarios.
+ */
+
 public class FileManager {
     private static final String MERCADO_FILE = "src/main/resources/mercat_fitxatges.txt";
     private static final String EQUIPOS_FILE = "src/main/resources/equipos.txt";

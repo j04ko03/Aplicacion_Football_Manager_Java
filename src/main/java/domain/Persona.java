@@ -1,3 +1,8 @@
+/**
+ * Clase base para representar una persona asociada a un club deportivo.
+ * Incluye información común como nombre, apellido, fecha de nacimiento, sueldo y motivación.
+ * Sus métodos permiten modificar atributos y realizar entrenamientos genéricos.
+ */
 package main.java.domain;
 
 import java.time.LocalDate;

@@ -3,6 +3,13 @@ package main;
 import main.java.domain.*;
 import main.java.services.*;
 import java.util.*;
+/**
+ * Clase principal de la aplicación Football Manager.
+ * <p>
+ * Se encarga de iniciar la carga de los datos de equipos y personas del mercado,
+ * mostrar estadísticas iniciales, gestionar el ciclo principal del menú interactivo,
+ * y guardar los datos al finalizar la ejecución.
+ */
 
 public class Main {
     public static void main(String[] args) {

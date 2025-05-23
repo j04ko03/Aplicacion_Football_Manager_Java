@@ -4,6 +4,11 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.*;
 
+/**
+ * Representa un equipo deportivo.
+ * Contiene información básica del club, lista de jugadores y su entrenador.
+ * Permite calcular la calidad promedio, gestionar la plantilla y realizar entrenamientos en grupo.
+ */
 public class Equipo implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;

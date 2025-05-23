@@ -4,6 +4,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
+/**
+ * Clase de utilidad para la gestión de entradas por consola.
+ * <p>
+ * Proporciona métodos estáticos para leer y validar diferentes tipos de información
+ * introducida por el usuario, como enteros dentro de un rango, fechas con formato específico
+ * y cadenas de texto no vacías.
+ */
 
 public class InputHelper {
 

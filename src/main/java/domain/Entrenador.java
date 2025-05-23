@@ -1,3 +1,8 @@
+/**
+ * Representa un entrenador de un equipo deportivo.
+ * Hereda de {@link Persona} e incorpora información sobre torneos ganados y si es seleccionador nacional.
+ * Incluye funcionalidad para gestionar entrenamientos y el sueldo.
+ */
 package main.java.domain;
 
 import java.time.LocalDate;

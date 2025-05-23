@@ -3,6 +3,13 @@ package main.java.services;
 import main.java.domain.*;
 import java.time.LocalDate;
 import java.util.*;
+/**
+ * Clase encargada de gestionar toda la lógica de los menús interactivos en consola
+ * para la gestión de equipos, jugadores, entrenadores y torneos de la aplicación.
+ * <p>
+ * Interactúa con las listas de equipos y personas, y ofrece métodos para mostrar menús,
+ * realizar altas/bajas, consultar datos, transferencias y gestionar la liga.
+ */
 
 public class MenuManager {
     private final Scanner scanner;
