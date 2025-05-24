@@ -12,6 +12,20 @@ import java.util.*;
  */
 
 public class Main {
+    /**
+     * Punto de entrada principal para la aplicación Football Manager.
+     * <p>
+     * Este método orquesta el flujo principal de la aplicación:
+     * <ol>
+     *     <li>Carga los datos existentes de {@code Persona} (mercado) y {@code Equipo} utilizando {@code FileManager}.</li>
+     *     <li>Imprime en la consola estadísticas iniciales, como el número de equipos cargados,
+     *     jugadores y entrenadores en el mercado, y el total de jugadores y entrenadores creados.</li>
+     *     <li>Crea una instancia de {@code MenuManager} y muestra el menú principal para la interacción del usuario.</li>
+     *     <li>Una vez que el usuario sale del menú, guarda el estado actual de los equipos y el mercado
+     *     de vuelta a los archivos utilizando {@code FileManager}.</li>
+     * </ol>
+     */
+
     public static void main(String[] args) {
         // Cargar datos existentes
         List<Persona> mercado = FileManager.cargarMercado();

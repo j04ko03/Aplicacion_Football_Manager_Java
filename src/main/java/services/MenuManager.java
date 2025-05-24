@@ -3,26 +3,46 @@ package main.java.services;
 import main.java.domain.*;
 import java.time.LocalDate;
 import java.util.*;
+
 /**
  * Clase encargada de gestionar toda la lógica de los menús interactivos en consola
  * para la gestión de equipos, jugadores, entrenadores y torneos de la aplicación.
  * <p>
- * Interactúa con las listas de equipos y personas, y ofrece métodos para mostrar menús,
- * realizar altas/bajas, consultar datos, transferencias y gestionar la liga.
+ * Proporciona métodos y menús que permiten realizar operaciones como:
+ * <ul>
+ *     <li>Consultar datos de equipos y jugadores.</li>
+ *     <li>Registrar nuevos equipos o personas en el mercado.</li>
+ *     <li>Configurar y disputar ligas.</li>
+ *     <li>Realizar entrenamientos, transferencias y otras funciones relacionadas con los equipos.</li>
+ * </ul>
+ * </p>
  */
-
 public class MenuManager {
     private final Scanner scanner;
     private final List<Equipo> equipos;
     private final List<Persona> mercado;
     private Liga ligaActual;
 
+    /**
+     * Constructor que inicializa el gestor del menú con las listas de equipos y mercado de fichajes.
+     *
+     * @param equipos Lista de equipos creados en la aplicación.
+     * @param mercado Lista de personas (jugadores y entrenadores) disponibles en el mercado.
+     */
     public MenuManager(List<Equipo> equipos, List<Persona> mercado) {
         this.scanner = new Scanner(System.in);
         this.equipos = equipos;
         this.mercado = mercado;
     }
 
+    /**
+     * Muestra el menú principal de la aplicación y permite al usuario navegar entre las opciones
+     * disponibles en un bucle interactivo.
+     * <p>
+     * Incluye acciones como gestionar equipos, consultar datos, disputar ligas, y otras opciones
+     * relacionadas con los equipos y el mercado.
+     * </p>
+     */
     public void mostrarMenuPrincipal() {
         int opcion;
         do {
@@ -59,6 +79,10 @@ public class MenuManager {
         } while (opcion != 0);
     }
 
+    /**
+     * Muestra la clasificación de la liga actual si esta fue configurada previamente.
+     * De lo contrario, informa al usuario de que no existe ninguna liga activa.
+     */
     private void mostrarClasificacion() {
         if (ligaActual == null) {
             System.out.println("No hi ha cap lliga en curs");
@@ -67,6 +91,11 @@ public class MenuManager {
         ligaActual.mostrarClasificacion();
     }
 
+    /**
+     * Permite al usuario seleccionar un equipo de la lista de equipos existentes.
+     *
+     * @return El equipo seleccionado o {@code null} si el usuario cancela la acción.
+     */
     private Equipo seleccionarEquipo() {
         if (equipos.isEmpty()) {
             System.out.println("No hi ha equips disponibles.");
@@ -85,6 +114,12 @@ public class MenuManager {
         return opcion == 0 ? null : equipos.get(opcion - 1);
     }
 
+    /**
+     * Permite registrar (dar de alta) un nuevo equipo solicitando al usuario los datos necesarios.
+     * <p>
+     * Valida que el nuevo nombre del equipo no exista previamente en la lista de equipos.
+     * </p>
+     */
     private void darAltaEquipo() {
         System.out.println("\nDonar d'alta nou equip:");
 
@@ -130,6 +165,12 @@ public class MenuManager {
         System.out.printf("Equip %s afegit correctament.%n", nombre);
     }
 
+    /**
+     * Permite registrar a una nueva persona en el mercado, como un jugador o entrenador.
+     * <p>
+     * Muestra un submenú para seleccionar el tipo de alta (jugador o entrenador).
+     * </p>
+     */
     private void darAltaPersona() {
         System.out.println("\nDonar d'alta:");
         System.out.println("1- Jugador/a");
@@ -146,6 +187,13 @@ public class MenuManager {
         }
     }
 
+    /**
+     * Permite registrar un nuevo jugador, generando atributos adicionales como sueldo,
+     * motivación, calidad y posición, además de los datos proporcionados por el usuario.
+     * <p>
+     * El nuevo jugador es añadido al mercado de fichajes.
+     * </p>
+     */
     private void altaJugador() {
         System.out.println("\nAlta de nou jugador/a:");
 
@@ -175,6 +223,13 @@ public class MenuManager {
         FileManager.guardarMercado(mercado);
     }
 
+    /**
+     * Permite registrar un nuevo entrenador, generando atributos adicionales como sueldo,
+     * motivación y torneos ganados, basado en entradas del usuario.
+     * <p>
+     * El nuevo entrenador es añadido al mercado de fichajes.
+     * </p>
+     */
     private void altaEntrenador() {
         System.out.println("\nAlta de nou entrenador/a:");
 
@@ -202,6 +257,10 @@ public class MenuManager {
         FileManager.guardarMercado(mercado);
     }
 
+    /**
+     * Consulta y muestra los datos de un equipo específico, incluyendo su nombre,
+     * año de fundación, ciudad, estadio, presidente, entrenador y jugadores.
+     */
     private void consultarDatosEquipo() {
         Equipo equipo = seleccionarEquipo();
         if (equipo == null) return;
@@ -227,6 +286,10 @@ public class MenuManager {
         equipo.getJugadores().forEach(j -> System.out.println("  " + j));
     }
 
+    /**
+     * Consulta y muestra los datos de un jugador en un equipo, identificándolo mediante
+     * su nombre y dorsal, que son ingresados por el usuario.
+     */
     private void consultarDatosJugador() {
         Equipo equipo = seleccionarEquipo();
         if (equipo == null) return;
@@ -256,6 +319,13 @@ public class MenuManager {
         }
     }
 
+    /**
+     * Configura una nueva liga solicitando al usuario los datos necesarios, como el nombre
+     * de la liga y los equipos participantes.
+     * <p>
+     * Una vez configurada, se disputan los partidos de la liga.
+     * </p>
+     */
     private void disputarNuevaLiga() {
         System.out.println("\nCrear nova lliga:");
 
@@ -304,6 +374,10 @@ public class MenuManager {
         ligaActual.mostrarClasificacion();
     }
 
+    /**
+     * Realiza una sesión de entrenamiento para todas las personas en el mercado de fichajes,
+     * permitiendo así mejorar estadísticas de jugadores y entrenadores.
+     */
     private void realizarEntrenamientoMercado() {
         System.out.println("\nRealitzant sessió d'entrenament al mercat de fitxatges...");
 
@@ -322,6 +396,10 @@ public class MenuManager {
         FileManager.guardarMercado(mercado);
     }
 
+    /**
+     * Permite transferir un jugador de un equipo a otro, asegurándose de que no se genere
+     * un conflicto en los dorsales del equipo destino.
+     */
     private void transferirJugador() {
         System.out.println("\nTransferir jugador/a:");
 
@@ -376,12 +454,20 @@ public class MenuManager {
                 nuevoDorsal);
     }
 
+    /**
+     * Guarda los datos actuales de los equipos y el mercado en los archivos correspondientes
+     * utilizando la clase {@link FileManager}.
+     */
     private void guardarDatos() {
         FileManager.guardarEquipos(equipos);
         FileManager.guardarMercado(mercado);
         System.out.println("Dades guardades correctament.");
     }
 
+    /**
+     * Gestiona las acciones de un equipo seleccionado ofreciendo opciones como modificar presidente,
+     * destituir entrenador o realizar fichajes.
+     */
     private void gestionarEquipo() {
         Equipo equipo = seleccionarEquipo();
         if (equipo == null) return;
@@ -408,6 +494,11 @@ public class MenuManager {
         } while (opcion != 0);
     }
 
+    /**
+     * Permite eliminar permanentemente un equipo de la lista de equipos en memoria.
+     *
+     * @param equipo El equipo que se desea eliminar.
+     */
     private void darBajaEquipo(Equipo equipo) {
         System.out.print("Estàs segur que vols donar de baixa l'equip " + equipo.getNombre() + "? (S/N): ");
         if (scanner.nextLine().equalsIgnoreCase("S")) {
@@ -418,6 +509,12 @@ public class MenuManager {
         }
     }
 
+    /**
+     * Actualiza el nombre del presidente de un equipo o elimina la información del presidente
+     * si el usuario así lo decide.
+     *
+     * @param equipo El equipo cuyos datos del presidente serán actualizados.
+     */
     private void modificarPresidente(Equipo equipo) {
         String actual = equipo.getNombrePresidente();
         if (actual != null) {
@@ -436,6 +533,11 @@ public class MenuManager {
         System.out.println("President/a actualitzat/da correctament.");
     }
 
+    /**
+     * Destituye al entrenador asignado a un equipo y lo transfiere al mercado de fichajes.
+     *
+     * @param equipo El equipo que pierde a su entrenador.
+     */
     private void destituirEntrenador(Equipo equipo) {
         if (equipo.getEntrenador() == null) {
             System.out.println("Aquest equip no té entrenador/a.");
@@ -454,6 +556,11 @@ public class MenuManager {
         }
     }
 
+    /**
+     * Permite fichar, ya sea un jugador o entrenador, del mercado al equipo seleccionado.
+     *
+     * @param equipo El equipo que realizará los fichajes.
+     */
     private void fitxarPersona(Equipo equipo) {
         System.out.println("\nFitxar:");
         System.out.println("1- Jugador/a");
@@ -470,6 +577,12 @@ public class MenuManager {
         }
     }
 
+    /**
+     * Permite fichar a un jugador disponible en el mercado, asegurándose de que el
+     * dorsal no esté duplicado en el equipo destino.
+     *
+     * @param equipo El equipo que está realizando el fichaje.
+     */
     private void fitxarJugador(Equipo equipo) {
         List<Jugador> jugadoresMercado = mercado.stream()
                 .filter(p -> p instanceof Jugador)
@@ -512,6 +625,12 @@ public class MenuManager {
                 equipo.getNombre(), dorsal);
     }
 
+    /**
+     * Permite fichar a un entrenador disponible en el mercado para el equipo seleccionado.
+     * Si el equipo ya tiene un entrenador, se le da la opción de sustituirlo.
+     *
+     * @param equipo El equipo que está realizando el fichaje.
+     */
     private void fitxarEntrenador(Equipo equipo) {
         List<Entrenador> entrenadoresMercado = mercado.stream()
                 .filter(p -> p instanceof Entrenador)
